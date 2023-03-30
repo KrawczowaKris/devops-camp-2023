@@ -3,9 +3,9 @@
 # Script should get a folder as an argument and return all files
 # (including in the nested directories) but without the extension
 
-folder=$1
+PATH_TO_FOLDER=$1
 
-files=$(find $folder -type f)
+files=$(find $PATH_TO_FOLDER -type f)
 
 for file in $files; do
   echo "${file%%.*}";
