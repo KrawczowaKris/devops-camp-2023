@@ -1,13 +1,16 @@
 #!/bin/bash
 
-folder=$1
-array_files=$(find $folder -type f)
-array_ext=( )
+# Script should get a folder as an argument and return a list of unique extensions of all files 
+# (including in the nested directories)
 
-for file in $array_files; do
-	ext="${file##*.}"
-	if [[ $file == *.* && ! "${array_ext[0]}" =~ $ext ]]; then
-		array_ext+=$ext
-		echo $ext
-	fi
+folder=$1
+files=$(find $folder -type f)
+extensions=( )
+
+for file in $files; do
+  extension="${file##*.}"
+  if [[ "$file" == *.* && ! "${extensions[0]}" =~ $extension ]]; then
+    extensions+=$extension
+    echo $extension
+  fi
 done
