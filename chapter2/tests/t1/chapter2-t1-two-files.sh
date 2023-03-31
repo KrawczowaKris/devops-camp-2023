@@ -3,15 +3,15 @@
 # The script takes two arguments with filenames.
 # If these files exist, it outputs their contents, otherwise it creates them.
 
-if [ $# -ne 2 ]
+if [ "$#" -ne 2 ]
   then echo "Please enter two arguments"
   exit 1
 fi
 
-FILE_1=$1
-FILE_2=$2
+FILE_1="$1"
+FILE_2="$2"
 
-for FILE in $FILE_1 $FILE_2; do
+for FILE in "$FILE_1" "$FILE_2"; do
   if [ -f "$FILE" ]; then
     cat "$FILE"
     echo "--------------"
