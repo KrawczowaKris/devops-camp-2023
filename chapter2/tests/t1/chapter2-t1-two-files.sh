@@ -8,13 +8,10 @@ if [ "$#" -ne 2 ]
   exit 1
 fi
 
-FILE_1="$1"
-FILE_2="$2"
-
-for FILE in "$FILE_1" "$FILE_2"; do
+for FILE in "$1" "$2"; do
   if [ -f "$FILE" ]; then
+    echo "$FILE"
     cat "$FILE"
-    echo "--------------"
   else
     openssl rand -base64 8 > "$FILE";
     chmod 700 "$FILE"
