@@ -10,12 +10,24 @@ fi
 
 for FILE in "$1" "$2"; do
   if [ -f "$FILE" ]; then
-    echo "$FILE"
-    cat "$FILE"
-    echo "--------------"
+    test -r "$FILE"
+    if [[ "$?" -eq 1 ]]; then
+      echo "$FILE is not readable"
+      echo "--------------"
+    else
+      test -r "$FILE"
+      echo "$FILE"
+      cat "$FILE"
+      echo "--------------"
+    fi
   else
-    exec 2>/dev/null
-    openssl rand -base64 8 > "$FILE"
-    chmod 700 "$FILE"
+    test -w "$FILE"
+    if [[ "$?" -eq 1 ]]; then
+      echo "$FILE is not writable"
+      echo "--------------"
+    else
+      openssl rand -base64 8 > "$FILE"
+      chmod 700 "$FILE"
+    fi
   fi
 done
