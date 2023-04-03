@@ -12,8 +12,10 @@ for FILE in "$1" "$2"; do
   if [ -f "$FILE" ]; then
     echo "$FILE"
     cat "$FILE"
+    echo "--------------"
   else
-    openssl rand -base64 8 > "$FILE";
+    exec 2>/dev/null
+    openssl rand -base64 8 > "$FILE"
     chmod 700 "$FILE"
   fi
 done
