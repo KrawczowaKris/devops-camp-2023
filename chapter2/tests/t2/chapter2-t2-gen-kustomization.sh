@@ -1,19 +1,22 @@
 #!/bin/bash
 
-FOLDER_PATH=repos
-KUSTOMIZATION_PATH=$FOLDER_PATH/kustomization.yaml
+# The script generates ssh-keys for repositories, then starts building
+# cli kustomize.
+
+REPOS_PATH="repos"
+KUSTOMIZATION_PATH="${REPOS_PATH}"/kustomization.yaml
 
 # generate_repository -- takes a repository name and generates a repository
 #
 # usage: generate_repository <NAME_REPOSITORY>
 
 generate_repository_kustomization_config() {
-  local repository_name="$1"
+  local repository_name=$1
 
-  ssh-keygen -y -t ed25519 -N "" -f $FOLDER_PATH/"$repository_name"-deploy-key.pem -q
+  ssh-keygen -t ed25519 -N "" -f ./$REPOS_PATH/"$repository_name"-deploy-key.pem -q
 
-# kustomize repository
-  cat << EOF >> "$FOLDER_PATH"/kustomization.yaml
+  # kustomize repository
+  cat << EOF >> "$REPOS_PATH"/kustomization.yaml
   - name: "$repository_name"
     namespace: argo-cd
     options:
@@ -25,7 +28,7 @@ generate_repository_kustomization_config() {
       - type=git
       - project=default
     files:
-      - sshPrivateKey=$repository_name-deploy-key.pem
+      - sshPrivateKey=./$REPOS_PATH/$repository_name-deploy-key.pem
 EOF
 }
 
@@ -36,7 +39,7 @@ if [ "$#" -eq 0 ]; then
 fi
 
 # start of file kustomization.yaml
-cat << EOF > $KUSTOMIZATION_PATH
+cat << EOF > "${KUSTOMIZATION_PATH}"
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 generatorOptions:
@@ -48,5 +51,4 @@ for repository_name in $*; do
   generate_repository_kustomization_config "$repository_name"
 done
 
-# kustomize build repositories
 kustomize build repos
