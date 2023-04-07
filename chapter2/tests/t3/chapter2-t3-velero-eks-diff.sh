@@ -26,7 +26,7 @@ backup_namespaces=$(curl -sSL \
   https://gist.github.com/dmitry-mightydevops/016139747b6cefdc94160607f95ede74/raw/velero.yaml)
 check_file_existence "velero.yaml" "${backup_namespaces}"
 
-kubernetus_namespaces=$(curl -sSL \
+kubernetes_namespaces=$(curl -sSL \
   https://gist.github.com/dmitry-mightydevops/297c4e235b61982f21a0bbbf7319ac24/raw/kubernetes-namespaces.txt)
 check_file_existence "kubernetes-namespaces.txt" "${kubernetes_namespaces}"
 
@@ -35,7 +35,7 @@ configured_ns=( $(echo "$backup_namespaces" | yq ".spec.source.helm.values" \
   | yq ".schedules[].template.includedNamespaces[]" | sort ) )
 
 for conf_ns in "${configured_ns[@]}"; do
-  kubernetus_namespaces="${kubernetus_namespaces[@]/$conf_ns}"
+  kubernetes_namespaces="${kubernetes_namespaces[@]/$conf_ns}"
 done;
 
-echo $kubernetus_namespaces | tr " " "\n"
+echo ${kubernetes_namespaces} | tr " " "\n"
