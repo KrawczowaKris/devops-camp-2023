@@ -16,13 +16,16 @@ for file in ${files}; do
   filename="${file##*/}"
   # Check if there is a dot in the filename
   if [[ "${filename}" == *.* ]]; then
-    # If the first symbol of the string is a dot, check how many dots are in the
-    # string. If one, then this file is not suitable
-    if [[ "${filename:0:1}" == "." && \
-      $(echo "${filename}" | tr -cd '.' | wc -m) -eq 1 ]]; then
+    # Check if the first symbol is a dot
+    if [[ "${filename:0:1}" == "." ]]; then
+      # Check if a dot is unique
+      if [[ $(echo "${filename}" | tr -cd '.' | wc -m) -eq 1 ]]; then
+        continue
+      fi
+      extension+=$(echo "${filename}" | cut -d. -f 3-)
       continue
     fi
-    extension="${file##*.}"
+    extension="${filename#*.}"
     extensions+="${extension} "
   fi
 done
