@@ -20,6 +20,7 @@ file_output() {
 PATH_TO_FOLDER="${1}"
 
 files=$(find "${PATH_TO_FOLDER}" -type f)
+#echo $files
 
 for file in ${files}; do
   filename="${file##*/}"
@@ -38,3 +39,4 @@ for file in ${files}; do
 
   file_output "${filename}" "n"
 done
+
