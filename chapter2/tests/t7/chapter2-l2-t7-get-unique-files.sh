@@ -9,16 +9,7 @@ if [ "${#}" -ne 1 ]; then
 fi
 
 PATH_FOLDER="${1}"
-files=$(find "${PATH_FOLDER}" -type f)
-name_files=()
 
-for file in ${files[@]}; do
-  name_file="${file##*/}"
-  name_files+=("$name_file")
-#  if [[ ! "${uniq_files[0]}" =~ ${name_file} ]]; then
-#    uniq_files+=${name_file}
-#    echo $name_file
-#  fi
-done
-
-echo "${name_files[@]}" | tr ' ' '\n' | sort -u
+find "${PATH_FOLDER}" -type f | while read filename; do
+  echo "${filename##*/}"
+done | sort | uniq
