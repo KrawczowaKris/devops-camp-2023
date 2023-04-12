@@ -12,13 +12,13 @@ while true; do
   count_ports="${#ports[@]}"
 
   k=4
-  while [[ "$k" -le "$count_ports" ]]; do
+  while [[ "${k}" -le "${count_ports}" ]]; do
     port="${ports[$k]}"
     if ! [[ "${all_ports[@]}" =~ "${port}" ]]; then
       echo "${ports[$k]}" "${ports[$k+1]}"
-      all_ports+="${port}"
+      all_ports+=("${port}")
     fi
-    ((k++)) && ((k++))
+    k="${k}"+2
   done
 
   if [[ "${#all_ports[@]}" -eq 0 ]]; then
