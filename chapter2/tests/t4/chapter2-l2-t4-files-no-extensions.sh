@@ -6,23 +6,27 @@
 # file_output -- concatenation of a file and a path to a file and
 # output the file
 #
-# usage: file_output <FILENAME> <DOT_FLAG>
+# usage: file_output <FILENAME> <HAS_DOT>
 #
 file_output() {
-  local file_without_ext=$(echo "${1}" | cut -d. -f 2)
+  local filename="${1}"
   if [[ "${2}" == "y" ]]; then
+    local file_without_ext=$(echo "${filename}" | cut -d. -f 2)
     echo "${filefolder}/.${file_without_ext}"
   else
+    local file_without_ext=$(echo "${filename}" | cut -d. -f 1)
     echo "${filefolder}/${file_without_ext}"
   fi
 }
 
+if [[ "${#}" -ne 1 ]]; then
+  echo "Invalid number of arguments. Please enter exactly one argument."
+  exit
+fi
+
 PATH_TO_FOLDER="${1}"
 
-files=$(find "${PATH_TO_FOLDER}" -type f)
-#echo $files
-
-for file in ${files}; do
+find "${PATH_TO_FOLDER}" -type f | while read file; do
   filename="${file##*/}"
   filefolder="${file%/*}"
 
@@ -39,4 +43,3 @@ for file in ${files}; do
 
   file_output "${filename}" "n"
 done
-
