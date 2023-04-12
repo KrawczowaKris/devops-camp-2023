@@ -3,14 +3,13 @@
 # Script get a folder as an argument and return a list of unique directories
 # of all files
 
-folder=$1
-files=$(find $folder -type f)
-dirs=( )
+if [ "${#}" -ne 1 ]; then
+  echo "Invalid number of argument. Please enter exactly one argument."
+  exit
+fi
 
-for file in $files; do
-  dir="${file%/*}"
-  if [[ ! "${dirs[0]}" =~ $dir ]]; then
-    dirs+=$dir
-    echo $dir
-  fi
-done
+PATH_FOLDER="${1}"
+
+find "${PATH_FOLDER}" -type f | while read file; do
+  echo "${file%/*}"
+done | sort | uniq
