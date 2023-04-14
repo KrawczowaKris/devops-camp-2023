@@ -16,6 +16,7 @@ separator() {
 # usage: folder_access_testing <FILENAME> <TEST_FLAG> <ERROR_TYPE>
 #
 test_access() {
+  local FILE="$1"
   local test_args="$2"
 
   test "${test_args}" "${FILE}"
