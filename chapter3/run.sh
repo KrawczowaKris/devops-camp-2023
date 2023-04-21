@@ -15,9 +15,7 @@ sudo fuser -k 443/tcp
 sudo /usr/sbin/php-fpm8.2 --php-ini "$(pwd)/php.ini" -y "$(pwd)/php-fpm.conf"
 sudo nginx -c "$(pwd)/nginx.conf"
 
-sleep 3
-
 # Sending requests
-curl https://localhost/reports/fast
+curl -w " %{time_total}" https://localhost/reports/fast
 echo
-curl https://localhost/reports/slow
+curl -w " %{time_total}" https://localhost/reports/slow
