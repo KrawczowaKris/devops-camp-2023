@@ -4,11 +4,15 @@
 # range 10000-10100. New found connections should be displayed in the console as soon
 # as they're identified.
 
+START_PORT=10000
+END_PORT=10100
+TIME_OUT=5
+
 ports=()
 all_ports=()
 
 while true; do
-  ports=( $(ss --tcp sport ge 10000 and sport le 10100 | awk '{ print $4,$5,$6,$7 }') )
+  ports=( $(ss -t sport ge "${START_PORT}" and sport le "${END_PORT}" | awk '{ print $4,$5>
   count_ports="${#ports[@]}"
 
   k=4
@@ -19,11 +23,11 @@ while true; do
       all_ports+=("${port}")
     fi
     k="${k}"+2
-  done
+    done
 
   if [[ "${#all_ports[@]}" -eq 0 ]]; then
     echo "No TCP listening sockets found bound to ports in 10000-10100 range"
   fi
 
-  sleep 5
+  sleep "${TIME_OUT}"
 done
