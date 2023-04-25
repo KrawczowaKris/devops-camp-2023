@@ -1,6 +1,7 @@
 ### Build
 Image building:
-```make build
+```
+make build
 
 [+] Building 2.5s (15/15) FINISHED                                                                                                                                       
  => [internal] load .dockerignore                                                                                                                                              0.0s
@@ -28,13 +29,15 @@ Image building:
 
 ### Run
 Run with memory limit:
-```make run memory_limit=100M
+```
+make run memory_limit=100M
 
 Usage over time: [22.19140625, 22.29296875, 36.63671875, 51.22265625, 66.09375, 80.7890625, 95.2265625, 22.4140625]
 Peak usage: 95.2265625
 ```
 If there is not enough memory:
-```make run memory_limit=30M
+```
+make run memory_limit=30M
 
 {exited false false false true false 0 137  2023-04-25T10:46:47.347929667Z 2023-04-25T10:46:47.766722563Z <nil>}
 
@@ -42,12 +45,15 @@ If there is not enough memory:
 
 ### Hadolint installation
 Hadolint checks your Dockerfiles.
-```brew install hadolint
+```
+brew install hadolint
 ```
 Start check:
-```hadolint Dockerfile
+```
+hadolint Dockerfile
 ```
 
 We need to run the following command to pre-commit:
-```pre-commit install
+```
+pre-commit install
 ```
