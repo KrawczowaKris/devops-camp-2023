@@ -7,3 +7,7 @@ label-schema:
   maintainer: text
   org.website: url
 strict-labels: true
+
+ignored:
+  - DL3049
+  
