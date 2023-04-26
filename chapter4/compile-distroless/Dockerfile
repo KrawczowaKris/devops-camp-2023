@@ -5,8 +5,9 @@ WORKDIR /memory
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Deploy
-FROM gcr.io/distroless/python3:debug
+FROM gcr.io/distroless/python3:nonroot
 WORKDIR /memory
 COPY --from=build-env /memory .
-COPY --from=build-env /usr/local /usr/local
+COPY --from=build-env /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
+ENV PYTHONPATH=/usr/local/lib/python3.11/site-packages
 ENTRYPOINT [ "python", "memory.py" ]
