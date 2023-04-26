@@ -10,7 +10,6 @@ KUSTOMIZATION_PATH="${REPOS_PATH}"/kustomization.yaml
 # and generates a repository
 #
 # usage: generate_repository <NAME_REPOSITORY>
-
 generate_repository_kustomization_config() {
   local repository_name="${1}"
 
@@ -51,7 +50,7 @@ secretGenerator:
 EOF
 
 for repository_name in ${*}; do
-  if [[ ! "${repository_name}" =~ ^[A-Za-z0-9.-_]+$ ]]; then
+  if [[ ! "${repository_name}" =~ ^[A-Za-z0-9._-]+$ ]]; then
     echo "${repository_name}" is invalid repository name
   else
     generate_repository_kustomization_config "${repository_name}"
