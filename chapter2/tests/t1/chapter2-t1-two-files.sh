@@ -11,17 +11,18 @@ separator() {
   echo -e "--------------"
 }
 
-# folder_access_testing -- function checks read access to a file or write access to a folder
+# test_access -- function checks read access to a file or write access to a folder
 #
-# usage: folder_access_testing <FILENAME> <TEST_FLAG> <ERROR_TYPE>
+# usage: test_access <FILENAME> <TEST_FLAG> <ERROR_TYPE>
 #
 test_access() {
-  local FILE="$1"
-  local test_args="$2"
+  local filename="$1"
+  local test_flag="$2"
+  local error_type="$3"
 
-  test "${test_args}" "${FILE}"
+  test "${test_flag}" "${filename}"
   if [[ "$?" -eq 1 ]]; then
-    echo "${FILE} is not $3"
+    echo "${filename} is not ${error_type}"
     separator
     exit 1
   fi
