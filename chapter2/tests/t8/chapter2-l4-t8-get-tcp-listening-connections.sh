@@ -12,7 +12,8 @@ ports=()
 all_ports=()
 
 while true; do
-  ports=( $(ss -t sport ge "${START_PORT}" and sport le "${END_PORT}" | awk '{ print $4,$5>
+  ports=( $(ss -t sport ge "${START_PORT}" and sport le "${END_PORT}" \
+    | awk '{ print $4,$5,$6}') )
   count_ports="${#ports[@]}"
 
   k=4
@@ -26,7 +27,7 @@ while true; do
     done
 
   if [[ "${#all_ports[@]}" -eq 0 ]]; then
-    echo "No TCP listening sockets found bound to ports in 10000-10100 range"
+    echo "No TCP listening sockets found bound to ports in ${START_PORT}-${END_PORT} range"
   fi
 
   sleep "${TIME_OUT}"
