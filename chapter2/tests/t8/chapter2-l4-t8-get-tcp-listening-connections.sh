@@ -7,28 +7,25 @@
 START_PORT=10000
 END_PORT=10100
 TIME_OUT=5
-
-ports=()
-all_ports=()
+HEADER_LIST="Local Address:Port      Peer Address:Port"
+all_ports=""
 
 while true; do
-  ports=( $(ss -t sport ge "${START_PORT}" and sport le "${END_PORT}" \
-    | awk '{ print $4,$5,$6}') )
-  count_ports="${#ports[@]}"
+  # Get the required ports
+  ports=$( ss -ltnpH "( sport ge ${START_PORT} && sport le ${END_PORT} )" )
+  # Looking for new ports
+  new_port=$( comm -13 <(echo "${all_ports}") <(echo "${ports}") )
 
-  k=4
-  while [[ "${k}" -le "${count_ports}" ]]; do
-    port="${ports[$k]}"
-    if ! [[ "${all_ports[@]}" =~ "${port}" ]]; then
-      echo "${ports[$k]}" "${ports[$k+1]}"
-      all_ports+=("${port}")
-    fi
-    k="${k}"+2
-    done
-
-  if [[ "${#all_ports[@]}" -eq 0 ]]; then
+  if [[ -z "${ports}" ]]; then
     echo "No TCP listening sockets found bound to ports in ${START_PORT}-${END_PORT} range"
+  elif [[ ! -z "${new_port}" ]]; then
+    if [[ -z "${all_ports}" ]]; then
+      echo "${HEADER_LIST}"
+    fi
+    # Display the new port in the table
+    echo "${new_port}" | sed -E "s/[[:space:]]+/ /g" | cut -d' ' -f 4,5 | sed -E "s/ /\t\t/"
   fi
 
+  all_ports="${ports}"
   sleep "${TIME_OUT}"
 done
