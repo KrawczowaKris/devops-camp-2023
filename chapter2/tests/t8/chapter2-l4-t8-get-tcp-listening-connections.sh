@@ -9,9 +9,9 @@ end_port=10100
 time_out=5
 all_ports=""
 
-while (true); do
+while true; do
   # Get the required ports
-  ports=$(ss -ltnp "( sport ge "${start_port}" && sport le "${end_port}" )")
+  ports=$( ss -ltnp "( sport ge "${start_port}" && sport le "${end_port}" )" )
   # Looking for new ports
   new_port=$( comm -13 <(echo "${all_ports}") <(echo "${ports}") 2> /dev/null )
 
