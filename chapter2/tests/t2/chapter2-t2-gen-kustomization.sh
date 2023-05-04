@@ -49,7 +49,7 @@ generatorOptions:
 secretGenerator:
 EOF
 
-for repository_name in ${*}; do
+for repository_name in "$@"; do
   if [[ ! "${repository_name}" =~ ^[A-Za-z0-9._-]+$ ]]; then
     echo "${repository_name}" is invalid repository name
   else
