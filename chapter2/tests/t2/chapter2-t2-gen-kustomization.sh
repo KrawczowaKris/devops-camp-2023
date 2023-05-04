@@ -9,7 +9,7 @@ KUSTOMIZATION_PATH="${REPOS_PATH}"/kustomization.yaml
 # generate_repository_kustomization_config -- takes a repository name
 # and generates a repository
 #
-# usage: generate_repository <NAME_REPOSITORY>
+# usage: generate_repository_kustomization_config <REPOSITORY_NAME>
 generate_repository_kustomization_config() {
   local repository_name="${1}"
 
