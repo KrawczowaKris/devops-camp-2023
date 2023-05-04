@@ -20,7 +20,7 @@ while true; do
   elif ! [[ -z "${new_port}" ]]; then
     unset '$ports[1]'
     # Display ports
-    echo "${ports}" | awk '{print $4,$5,$6,$7}'
+    echo "${new_port}" | awk '{print $4,$5,$6,$7}'
   fi
 
   all_ports="${ports}"
