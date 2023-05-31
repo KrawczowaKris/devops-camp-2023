@@ -1,0 +1,7 @@
+[[build.env]]
+name = "BP_PHP_SERVER"
+value = "nginx"
+
+[[build.env]]
+name = "PHP_NGINX_PATH"
+value = "/workspace/.nginx.conf.d/nginx.conf"
