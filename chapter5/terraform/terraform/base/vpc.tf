@@ -25,7 +25,7 @@ data "aws_instance" "ec2-1" {
     values = ["running"]
   }
 
-  depends_on = [ module.wordpress_ec2 ]
+  depends_on = [module.wordpress_ec2]
 }
 
 data "aws_instance" "ec2-2" {
@@ -39,5 +39,5 @@ data "aws_instance" "ec2-2" {
     values = ["running"]
   }
 
-  depends_on = [ module.wordpress_ec2 ]
+  depends_on = [module.wordpress_ec2]
 }

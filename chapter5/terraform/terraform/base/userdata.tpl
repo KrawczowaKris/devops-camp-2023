@@ -76,10 +76,16 @@ if ( ! defined( 'ABSPATH' ) ) {
         define( 'ABSPATH', __DIR__ . '/' );
 }
 
+if (\$_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
+  \$_SERVER['HTTPS'] = 'on';
+
 require_once ABSPATH . 'wp-settings.php';
 
 define( 'FS_METHOD', 'direct' );
 \$_SERVER["HTTPS"] = "on";
+
+define( 'WP_HOME', 'https://nadezhda-niukina-user-exam.saritasa-camps.link/' );
+define( 'WP_SITEURL', 'https://nadezhda-niukina-user-exam.saritasa-camps.link/' );
 EOF
 fi
 

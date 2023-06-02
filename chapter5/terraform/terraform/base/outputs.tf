@@ -6,7 +6,7 @@ output "admin_password_rds" {
 
 output "instance_ids" {
   description = "List of created instance id"
-  value       = [ module.wordpress_ec2["1"].id, module.wordpress_ec2["2"].id ]
+  value       = [module.wordpress_ec2["1"].id, module.wordpress_ec2["2"].id]
 }
 
 output "efs_id" {
@@ -16,10 +16,10 @@ output "efs_id" {
 
 output "alb_url" {
   description = "URL of ALB"
-  value = module.wordpress_alb.lb_dns_name
+  value       = module.wordpress_alb.lb_dns_name
 }
 
 output "fqdn_record" {
   description = "FQDN record for ALB"
-  value = aws_route53_record.a_record_for_alb.fqdn
+  value       = aws_route53_record.a_record_for_alb.fqdn
 }

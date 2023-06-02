@@ -138,10 +138,10 @@ module "wordpress_ec2" {
     secure_auth_salt = local.labels_wp_keys.secure_auth_salt,
     logged_in_salt   = local.labels_wp_keys.logged_in_salt,
     nonce_salt       = local.labels_wp_keys.nonce_salt
-    efs_id = local.efs_id
+    efs_id           = local.efs_id
   })
-  depends_on = [ module.wordpress_rds ]
-  tags = var.tags
+  depends_on = [module.wordpress_rds]
+  tags       = var.tags
 }
 
 /*
@@ -224,7 +224,7 @@ module "wordpress_efs" {
   }
 
   attach_policy = false
-  
+
   tags = var.tags
 }
 
@@ -333,7 +333,7 @@ module "wordpress_alb" {
     }
   ]
 
-  depends_on = [ module.wordpress_ec2 ]
+  depends_on = [data.aws_instance.ec2-1]
 
   tags = var.tags
 }
@@ -355,7 +355,7 @@ resource "aws_route53_record" "a_record_for_alb" {
     evaluate_target_health = true
   }
 
-  depends_on = [ module.wordpress_alb ]
+  depends_on = [module.wordpress_alb]
 }
 
 /*
