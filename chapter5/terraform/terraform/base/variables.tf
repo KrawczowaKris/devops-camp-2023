@@ -1,89 +1,94 @@
-variable "cache_dns" {
+variable "ip_address" {
+  description = "Corporate IP address"
+  type        = string
+}
+
+variable "wordpress_instances_count" {
+  description = "Number of instances ec2"
+  type        = number
+}
+
+variable "dns_name" {
   description = "Name of domen for site"
   type        = string
 }
 
-variable "cache_vpc_tags" {
-  description = "VPC tags to place cache host into"
+variable "vpc_tags" {
+  description = "VPC tags to place host into"
   type        = map(string)
   default = {
     Name = "default"
   }
 }
 
-variable "cache_availability_zones" {
-  description = "Instance Availability Zones of the Cache host"
+variable "availability_zones" {
+  description = "Instance Availability Zones of the host"
   type        = list(string)
 }
 
-variable "cache_engine" {
-  description = "ElastiCache Engine, like redis"
-  type        = string
-}
-
-variable "cache_array_index_ec2" {
-  description = "Array of index for ec2 instances"
-  type        = list(string)
-}
-
-variable "cache_instance_ec2_type" {
+variable "instance_ec2_type" {
   description = "Type of instance ec2"
   type        = string
 }
 
-variable "cache_ami_id" {
+variable "instance_ami_id" {
   description = "ID of AMI type for ec2 instance"
   type        = string
 }
 
-variable "cache_ingress_rules_rds" {
-  description = "Ingress rules for rds instances"
-  type        = list(map(string))
-}
-
-variable "cache_ingress_rules_alb" {
-  description = "Ingress rules for alb"
-  type        = list(map(string))
-}
-
-variable "cache_egress_rules" {
-  description = "Egress rules for ec2 instances"
-  type        = list(map(string))
-}
-
-variable "cache_mount_targets_efs" {
-  description = "List of subnets for EFS"
-  type        = any
-}
-
-variable "cache_instance_rds_class" {
+variable "instance_rds_class" {
   description = "Type of instance rds class"
   type        = string
 }
 
-variable "cache_rds_major_engine_version" {
+variable "rds_major_engine_version" {
   description = "Database major engine version"
   type        = string
 }
 
-variable "cache_rds_name" {
+variable "rds_name" {
   description = "Name of RDS"
   type        = string
 }
 
-variable "cache_storage_type" {
+variable "rds_storage_type" {
   description = "Type of storage for RDS"
   type        = string
 }
 
-variable "cache_allocated_storage" {
+variable "rds_allocated_storage" {
   description = "Amount of allocated storage for RDS"
   type        = string
 }
 
-variable "cache_list_labels_random_values" {
+variable "rds_backup_window" {
+  description = "Backup window for RDS"
+  type = string
+}
+
+variable "rds_maintenance_window" {
+  description = "Maintenance window for RDS"
+  type = string
+}
+
+variable "rds_engine" {
+  description = "Engine for RDS"
+  type = string
+}
+
+variable "list_labels_random_values" {
   description = "Label for authentication unique keys and salts for wp-config.php"
   type        = list(string)
+}
+
+variable "efs_throughput_mode" {
+  description = "Throughput mode for EFS"
+  type = string
+}
+
+variable "efs_transition_to_ia" {
+  description = "Transition to ia for EFS"
+  type = string
 }
 
 /* 
@@ -92,8 +97,8 @@ variable "cache_list_labels_random_values" {
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
  */
 
-variable "client" {
-  description = "Client username"
+variable "owner" {
+  description = "Owner username"
   type        = string
 }
 

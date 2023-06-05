@@ -1,5 +1,5 @@
 data "aws_vpc" "target" {
-  tags = var.cache_vpc_tags
+  tags = var.vpc_tags
 }
 
 data "aws_subnets" "wordpress" {
@@ -9,29 +9,25 @@ data "aws_subnets" "wordpress" {
   }
 }
 
+data "aws_subnet" "filtered_subnets" {
+  for_each = toset(var.availability_zones)
+  vpc_id = data.aws_vpc.target.id
+
+  filter {
+    name="availability-zone"
+    values=[each.value]
+  }
+}
+
 data "aws_route53_zone" "zone_record" {
-  name         = var.cache_dns
+  name         = var.dns_name
   private_zone = false
 }
 
-data "aws_instance" "ec2-1" {
+data "aws_instances" "ec2" {
   filter {
     name   = "tag:Name"
-    values = ["${var.environment}-${var.client}-${var.project}-ec2-${var.cache_array_index_ec2[0]}"]
-  }
-
-  filter {
-    name   = "instance-state-name"
-    values = ["running"]
-  }
-
-  depends_on = [module.wordpress_ec2]
-}
-
-data "aws_instance" "ec2-2" {
-  filter {
-    name   = "tag:Name"
-    values = ["${var.environment}-${var.client}-${var.project}-ec2-${var.cache_array_index_ec2[1]}"]
+    values = [for instance in module.wordpress_ec2 : instance.tags_all.Name]
   }
 
   filter {

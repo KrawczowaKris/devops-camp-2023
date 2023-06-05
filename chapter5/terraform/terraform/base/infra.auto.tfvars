@@ -1,4 +1,4 @@
-client  = "nadezhda-niukina-user"
+owner   = "nadezhda-niukina-user"
 project = "wordpress"
 
 tags = {

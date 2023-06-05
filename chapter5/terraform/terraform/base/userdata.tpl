@@ -84,8 +84,8 @@ require_once ABSPATH . 'wp-settings.php';
 define( 'FS_METHOD', 'direct' );
 \$_SERVER["HTTPS"] = "on";
 
-define( 'WP_HOME', 'https://nadezhda-niukina-user-exam.saritasa-camps.link/' );
-define( 'WP_SITEURL', 'https://nadezhda-niukina-user-exam.saritasa-camps.link/' );
+define( 'WP_HOME', 'https://${fqdn_record}/' );
+define( 'WP_SITEURL', 'https://${fqdn_record}/' );
 EOF
 fi
 
