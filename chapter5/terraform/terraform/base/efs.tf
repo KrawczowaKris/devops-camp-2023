@@ -8,7 +8,7 @@ module "wordpress_efs" {
   source          = "terraform-aws-modules/efs/aws"
   name            = local.labels.wordpress_efs
   throughput_mode = var.efs_throughput_mode
-  mount_targets   = {
+  mount_targets = {
     "${data.aws_subnet.filtered_subnets[var.availability_zones[0]].availability_zone}" = {
       subnet_id = "${data.aws_subnet.filtered_subnets[var.availability_zones[0]].id}"
     }

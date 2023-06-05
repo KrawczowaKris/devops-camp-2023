@@ -63,17 +63,17 @@ variable "rds_allocated_storage" {
 
 variable "rds_backup_window" {
   description = "Backup window for RDS"
-  type = string
+  type        = string
 }
 
 variable "rds_maintenance_window" {
   description = "Maintenance window for RDS"
-  type = string
+  type        = string
 }
 
 variable "rds_engine" {
   description = "Engine for RDS"
-  type = string
+  type        = string
 }
 
 variable "list_labels_random_values" {
@@ -83,12 +83,12 @@ variable "list_labels_random_values" {
 
 variable "efs_throughput_mode" {
   description = "Throughput mode for EFS"
-  type = string
+  type        = string
 }
 
 variable "efs_transition_to_ia" {
   description = "Transition to ia for EFS"
-  type = string
+  type        = string
 }
 
 /* 

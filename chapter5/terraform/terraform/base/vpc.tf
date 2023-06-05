@@ -11,11 +11,11 @@ data "aws_subnets" "wordpress" {
 
 data "aws_subnet" "filtered_subnets" {
   for_each = toset(var.availability_zones)
-  vpc_id = data.aws_vpc.target.id
+  vpc_id   = data.aws_vpc.target.id
 
   filter {
-    name="availability-zone"
-    values=[each.value]
+    name   = "availability-zone"
+    values = [each.value]
   }
 }
 

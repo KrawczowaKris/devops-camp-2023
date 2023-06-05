@@ -39,7 +39,6 @@ module "wordpress_alb" {
       name             = local.labels.wordpress_tg
       backend_protocol = "HTTP"
       backend_port     = 80
-      target_type      = "instance"
       targets = aws_lb_target_group_attachment.wordpress_tg
     }
   ]
