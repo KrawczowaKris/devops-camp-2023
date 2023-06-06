@@ -5,14 +5,14 @@
 */
 
 resource "aws_lb_target_group" "wordpress_tg_type" {
-  port             = 80
-  protocol         = "HTTP"
-  target_type      = "instance"
-  vpc_id           = data.aws_vpc.target.id
+  port        = 80
+  protocol    = "HTTP"
+  target_type = "instance"
+  vpc_id      = data.aws_vpc.target.id
 }
 
 resource "aws_lb_target_group_attachment" "wordpress_tg" {
-  count = var.wordpress_instances_count
+  count = var.wordpress_ec2_instances_count
 
   target_group_arn = aws_lb_target_group.wordpress_tg_type.arn
   target_id        = module.wordpress_ec2[count.index].id
@@ -39,7 +39,7 @@ module "wordpress_alb" {
       name             = local.labels.wordpress_tg
       backend_protocol = "HTTP"
       backend_port     = 80
-      targets = aws_lb_target_group_attachment.wordpress_tg
+      targets          = aws_lb_target_group_attachment.wordpress_tg
     }
   ]
 

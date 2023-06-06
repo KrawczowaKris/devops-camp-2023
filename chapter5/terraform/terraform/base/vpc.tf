@@ -9,25 +9,42 @@ data "aws_subnets" "wordpress" {
   }
 }
 
-data "aws_subnet" "filtered_subnets" {
-  for_each = toset(var.availability_zones)
-  vpc_id   = data.aws_vpc.target.id
+data "aws_subnet" "subnet_a" {
+  vpc_id = data.aws_vpc.target.id
 
   filter {
     name   = "availability-zone"
-    values = [each.value]
+    values = [var.availability_zones[0]]
+  }
+}
+
+data "aws_subnet" "subnet_b" {
+  vpc_id = data.aws_vpc.target.id
+
+  filter {
+    name   = "availability-zone"
+    values = [var.availability_zones[1]]
+  }
+}
+
+data "aws_subnet" "subnet_c" {
+  vpc_id = data.aws_vpc.target.id
+
+  filter {
+    name   = "availability-zone"
+    values = [var.availability_zones[2]]
   }
 }
 
 data "aws_route53_zone" "zone_record" {
-  name         = var.dns_name
+  name         = var.hosted_zone
   private_zone = false
 }
 
 data "aws_instances" "ec2" {
   filter {
     name   = "tag:Name"
-    values = [for instance in module.wordpress_ec2 : instance.tags_all.Name]
+    values = module.wordpress_ec2[*].tags_all.Name
   }
 
   filter {

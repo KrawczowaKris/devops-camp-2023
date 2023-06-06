@@ -7,16 +7,16 @@
 module "wordpress_efs" {
   source          = "terraform-aws-modules/efs/aws"
   name            = local.labels.wordpress_efs
-  throughput_mode = var.efs_throughput_mode
+  throughput_mode = var.wordpress_efs_throughput_mode
   mount_targets = {
-    "${data.aws_subnet.filtered_subnets[var.availability_zones[0]].availability_zone}" = {
-      subnet_id = "${data.aws_subnet.filtered_subnets[var.availability_zones[0]].id}"
+    "${data.aws_subnet.subnet_a.availability_zone}" = {
+      subnet_id = data.aws_subnet.subnet_a.id
     }
-    "${data.aws_subnet.filtered_subnets[var.availability_zones[1]].availability_zone}" = {
-      subnet_id = "${data.aws_subnet.filtered_subnets[var.availability_zones[1]].id}"
+    "${data.aws_subnet.subnet_b.availability_zone}" = {
+      subnet_id = data.aws_subnet.subnet_b.id
     }
-    "${data.aws_subnet.filtered_subnets[var.availability_zones[2]].availability_zone}" = {
-      subnet_id = "${data.aws_subnet.filtered_subnets[var.availability_zones[2]].id}"
+    "${data.aws_subnet.subnet_c.availability_zone}" = {
+      subnet_id = data.aws_subnet.subnet_c.id
     }
   }
 
@@ -30,7 +30,7 @@ module "wordpress_efs" {
   }
 
   lifecycle_policy = {
-    transition_to_ia = var.efs_transition_to_ia
+    transition_to_ia = var.wordpress_efs_transition_to_ia
   }
 
   attach_policy = false

@@ -16,7 +16,7 @@ resource "random_password" "rds_admin_password" {
 */
 
 resource "random_string" "random" {
-  for_each         = toset(var.list_labels_random_values)
+  for_each         = toset(var.wordpress_labels_random_values)
   length           = 64
   special          = true
   override_special = "<>{}()+*=#@;_/|"

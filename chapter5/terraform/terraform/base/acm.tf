@@ -5,7 +5,7 @@
 */
 
 resource "aws_acm_certificate" "cert" {
-  domain_name       = "${var.owner}-exam.${var.dns_name}"
+  domain_name       = "${var.owner}-exam.${var.hosted_zone}"
   validation_method = "DNS"
 }
 

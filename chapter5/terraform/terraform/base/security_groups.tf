@@ -55,7 +55,7 @@ module "wordpress_rds_sg" {
     {
       rule        = "mysql-tcp"
       description = "Open connection with mysql"
-      cidr_blocks = "195.201.120.196/32"
+      cidr_blocks = var.ip_address
     },
   ]
   ingress_with_source_security_group_id = [

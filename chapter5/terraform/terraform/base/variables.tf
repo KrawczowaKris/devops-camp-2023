@@ -1,20 +1,20 @@
 variable "ip_address" {
-  description = "Corporate IP address"
+  description = "Corporate IP address for ssh access to ec2 instances and rds"
   type        = string
 }
 
-variable "wordpress_instances_count" {
-  description = "Number of instances ec2"
+variable "wordpress_ec2_instances_count" {
+  description = "Number of wordpress instances under load-balancing"
   type        = number
 }
 
-variable "dns_name" {
-  description = "Name of domen for site"
+variable "hosted_zone" {
+  description = "Hosted zone for dns records for site"
   type        = string
 }
 
 variable "vpc_tags" {
-  description = "VPC tags to place host into"
+  description = "VPC tags to place host or ec2 instances into"
   type        = map(string)
   default = {
     Name = "default"
@@ -26,69 +26,86 @@ variable "availability_zones" {
   type        = list(string)
 }
 
-variable "instance_ec2_type" {
+variable "wordpress_ec2_instance_type" {
   description = "Type of instance ec2"
   type        = string
 }
 
-variable "instance_ami_id" {
+variable "wordpress_ec2_instance_ami_id" {
   description = "ID of AMI type for ec2 instance"
   type        = string
 }
 
-variable "instance_rds_class" {
+variable "wordpress_rds_instance_type" {
   description = "Type of instance rds class"
   type        = string
 }
 
-variable "rds_major_engine_version" {
+variable "wordpress_rds_major_engine_version" {
   description = "Database major engine version"
   type        = string
 }
 
-variable "rds_name" {
+variable "wordpress_rds_name" {
   description = "Name of RDS"
   type        = string
 }
 
-variable "rds_storage_type" {
+variable "wordpress_rds_storage_type" {
   description = "Type of storage for RDS"
   type        = string
 }
 
-variable "rds_allocated_storage" {
+variable "wordpress_rds_allocated_storage" {
   description = "Amount of allocated storage for RDS"
   type        = string
 }
 
-variable "rds_backup_window" {
+variable "wordpress_rds_backup_window" {
   description = "Backup window for RDS"
   type        = string
 }
 
-variable "rds_maintenance_window" {
+variable "wordpress_rds_maintenance_window" {
   description = "Maintenance window for RDS"
   type        = string
 }
 
-variable "rds_engine" {
+variable "wordpress_rds_engine" {
   description = "Engine for RDS"
   type        = string
 }
 
-variable "list_labels_random_values" {
-  description = "Label for authentication unique keys and salts for wp-config.php"
-  type        = list(string)
+variable "wordpress_rds_family" {
+  description = "Family of RDS"
+  type        = string
 }
 
-variable "efs_throughput_mode" {
+variable "wordpress_rds_username" {
+  description = "Username of RDS user"
+  type        = string
+  default     = "admin"
+}
+
+variable "wordpress_rds_port" {
+  description = "Port for RDS"
+  type        = number
+  default     = 3306
+}
+
+variable "wordpress_efs_throughput_mode" {
   description = "Throughput mode for EFS"
   type        = string
 }
 
-variable "efs_transition_to_ia" {
+variable "wordpress_efs_transition_to_ia" {
   description = "Transition to ia for EFS"
   type        = string
+}
+
+variable "wordpress_labels_random_values" {
+  description = "Labels for authentication unique keys and salts for wp-config.php"
+  type        = list(string)
 }
 
 /* 

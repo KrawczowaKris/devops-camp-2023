@@ -6,7 +6,7 @@ output "admin_password_rds" {
 
 output "instance_ids" {
   description = "List of created instance id"
-  value       = [for instance in module.wordpress_ec2 : instance.id]
+  value       = module.wordpress_ec2[*].id
 }
 
 output "efs_id" {
