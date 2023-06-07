@@ -1,3 +1,10 @@
+locals {
+  rendered_index_html = templatefile("${path.module}/templates/index.html.tftpl", {
+    environment = var.environment,
+    client      = var.client
+  })
+}
+
 module "nginx" {
   source = "../container"
 
@@ -5,13 +12,11 @@ module "nginx" {
   container_image_keep_locally = var.container_image_keep_locally
   container_name = var.container_name
   
-  container_ports = {
-    internal = var.container_ports.internal
-    external = var.container_ports.external
-  }
+  container_ports = var.container_ports
 
   volumes_host_path = "${abspath(path.root)}/../../${var.environment}"
-  volumes_container_path = "/usr/share/nginx/html"
+  #volumes_host_path = var.nginx_volumes_host_path
+  volumes_container_path = var.nginx_volumes_container_path
 
   depends_on = [
     null_resource.index_page

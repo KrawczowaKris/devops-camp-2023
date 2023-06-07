@@ -1,11 +1,11 @@
 output "container_id" {
   description = "ID of the Docker container"
-  value       = module.redis.container_id
+  value       = module.redis.id
 }
 
 output "container_id_short" {
   description = "Short ID of the Docker container"
-  value       = substr(module.redis.container_id, 0, 12)
+  value       = substr(module.redis.id, 0, 12)
 }
 
 output "image_id" {

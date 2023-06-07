@@ -17,12 +17,21 @@ variable "nginx" {
   }
 }
 
+# variable "nginx_volumes_host_path" {
+#   description = "Path to volume host for nginx"
+#   type        = string
+# }
+
+variable "nginx_volumes_container_path" {
+  description = "Path to volume container for nginx"
+  type        = string
+}
 
 /* 
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
   │ redis configuration variables                                                                                    │
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
- */
+*/
 
 
 variable "use_redis" {
