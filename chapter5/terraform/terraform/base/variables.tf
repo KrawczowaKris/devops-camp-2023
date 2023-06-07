@@ -1,16 +1,16 @@
-variable "ip_address" {
+variable "eks_office_public_ip_address" {
   description = "Corporate IP address for ssh access to ec2 instances and rds"
   type        = string
-}
-
-variable "wordpress_ec2_instances_count" {
-  description = "Number of wordpress instances under load-balancing"
-  type        = number
 }
 
 variable "hosted_zone" {
   description = "Hosted zone for dns records for site"
   type        = string
+}
+
+variable "availability_zones" {
+  description = "Instance Availability Zones of the host"
+  type        = list(string)
 }
 
 variable "vpc_tags" {
@@ -21,9 +21,9 @@ variable "vpc_tags" {
   }
 }
 
-variable "availability_zones" {
-  description = "Instance Availability Zones of the host"
-  type        = list(string)
+variable "wordpress_ec2_instances_count" {
+  description = "Number of wordpress instances under load-balancing"
+  type        = number
 }
 
 variable "wordpress_ec2_instance_type" {
@@ -36,6 +36,11 @@ variable "wordpress_ec2_instance_ami_id" {
   type        = string
 }
 
+variable "wordpress_rds_name" {
+  description = "Name of RDS"
+  type        = string
+}
+
 variable "wordpress_rds_instance_type" {
   description = "Type of instance rds class"
   type        = string
@@ -43,11 +48,6 @@ variable "wordpress_rds_instance_type" {
 
 variable "wordpress_rds_major_engine_version" {
   description = "Database major engine version"
-  type        = string
-}
-
-variable "wordpress_rds_name" {
-  description = "Name of RDS"
   type        = string
 }
 
@@ -81,18 +81,6 @@ variable "wordpress_rds_family" {
   type        = string
 }
 
-variable "wordpress_rds_username" {
-  description = "Username of RDS user"
-  type        = string
-  default     = "admin"
-}
-
-variable "wordpress_rds_port" {
-  description = "Port for RDS"
-  type        = number
-  default     = 3306
-}
-
 variable "wordpress_efs_throughput_mode" {
   description = "Throughput mode for EFS"
   type        = string
@@ -106,6 +94,18 @@ variable "wordpress_efs_transition_to_ia" {
 variable "wordpress_labels_random_values" {
   description = "Labels for authentication unique keys and salts for wp-config.php"
   type        = list(string)
+}
+
+variable "wordpress_rds_username" {
+  description = "Username of RDS user"
+  type        = string
+  default     = "admin"
+}
+
+variable "wordpress_rds_port" {
+  description = "Port for RDS"
+  type        = number
+  default     = 3306
 }
 
 /* 

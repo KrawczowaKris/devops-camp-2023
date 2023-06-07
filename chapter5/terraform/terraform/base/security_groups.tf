@@ -14,7 +14,7 @@ module "wordpress_ec2_sg" {
     {
       rule        = "ssh-tcp"
       description = "Open ssh connection"
-      cidr_blocks = var.ip_address
+      cidr_blocks = var.eks_office_public_ip_address
     }
   ]
   ingress_with_source_security_group_id = [
@@ -55,7 +55,7 @@ module "wordpress_rds_sg" {
     {
       rule        = "mysql-tcp"
       description = "Open connection with mysql"
-      cidr_blocks = var.ip_address
+      cidr_blocks = var.eks_office_public_ip_address
     },
   ]
   ingress_with_source_security_group_id = [

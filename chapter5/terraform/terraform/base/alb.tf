@@ -64,7 +64,7 @@ module "wordpress_alb" {
     }
   ]
 
-  depends_on = [data.aws_instances.ec2]
+  depends_on = [module.wordpress_ec2]
 
   tags = var.tags
 }

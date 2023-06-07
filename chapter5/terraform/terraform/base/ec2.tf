@@ -13,7 +13,7 @@ module "wordpress_ec2" {
   instance_type          = var.wordpress_ec2_instance_type
   key_name               = module.ssh_key_pair.key_name
   vpc_security_group_ids = [module.wordpress_ec2_sg.security_group_id]
-  subnet_id              = data.aws_subnet.subnet_a.id
+  subnet_id              = data.aws_subnet.subnet_az.id
   user_data = templatefile("${path.cwd}/terraform/base/userdata.tpl", {
     db_name      = var.wordpress_rds_name
     password_rds = random_password.rds_admin_password.result
@@ -30,6 +30,6 @@ module "wordpress_ec2" {
     efs_id           = module.wordpress_efs.id
     fqdn_record      = aws_acm_certificate.cert.domain_name
   })
-  depends_on = [module.wordpress_rds]
+  depends_on = [module.wordpress_rds, module.wordpress_efs]
   tags       = var.tags
 }

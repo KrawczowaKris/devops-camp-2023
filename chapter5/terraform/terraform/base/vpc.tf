@@ -9,7 +9,7 @@ data "aws_subnets" "wordpress" {
   }
 }
 
-data "aws_subnet" "subnet_a" {
+data "aws_subnet" "subnet_az" {
   vpc_id = data.aws_vpc.target.id
 
   filter {
@@ -18,7 +18,7 @@ data "aws_subnet" "subnet_a" {
   }
 }
 
-data "aws_subnet" "subnet_b" {
+data "aws_subnet" "subnet_bz" {
   vpc_id = data.aws_vpc.target.id
 
   filter {
@@ -27,7 +27,7 @@ data "aws_subnet" "subnet_b" {
   }
 }
 
-data "aws_subnet" "subnet_c" {
+data "aws_subnet" "subnet_cz" {
   vpc_id = data.aws_vpc.target.id
 
   filter {
@@ -39,18 +39,4 @@ data "aws_subnet" "subnet_c" {
 data "aws_route53_zone" "zone_record" {
   name         = var.hosted_zone
   private_zone = false
-}
-
-data "aws_instances" "ec2" {
-  filter {
-    name   = "tag:Name"
-    values = module.wordpress_ec2[*].tags_all.Name
-  }
-
-  filter {
-    name   = "instance-state-name"
-    values = ["running"]
-  }
-
-  depends_on = [module.wordpress_ec2]
 }
