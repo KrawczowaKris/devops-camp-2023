@@ -6,4 +6,5 @@ module "redis" {
   container_name = var.container_name
   
   container_ports = var.container_ports
+  provisioners    = []
 }

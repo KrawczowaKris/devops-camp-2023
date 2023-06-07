@@ -18,6 +18,13 @@ module "nginx" {
   #volumes_host_path = var.nginx_volumes_host_path
   volumes_container_path = var.nginx_volumes_container_path
 
+  provisioner = {
+    type        = "local-exec"
+    command     = "${path.root}/terraform/_modules/container/deleting_pages.sh"
+    when        = "destroy"
+    working_dir = "${path.root}"
+  }
+
   depends_on = [
     null_resource.index_page
   ]

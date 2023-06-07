@@ -18,7 +18,23 @@ resource "docker_container" "container" {
   }
 
   provisioner "local-exec" {
-    when    = destroy
-    command = "rm -rf '${self.volumes.*.host_path[0]}'"
-  }  
+    command     = var.provisioner.command
+    when        = destroy
+    working_dir = var.provisioner.working_dir
+    environment = {
+      folder_name = var.environment
+    }
+  } 
+
+  # dynamic provisioner {
+  #   for_each = var.provisioners
+
+  #   content {
+  #     type        = provisioner.value.type
+  #     command     = provisioner.value.command
+  #     when        = provisioner.value.when
+  #     working_dir = provisioner.value.working_dir
+  #     #environment = provisioner.value.environment
+  #   }
+  # }
 }
