@@ -1,7 +1,7 @@
 output "admin_password_rds" {
   sensitive   = true
-  value       = random_password.rds_admin_password.result
   description = "Password for RDS admin"
+  value       = random_password.rds_admin_password.result
 }
 
 output "instance_ids" {

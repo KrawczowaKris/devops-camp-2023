@@ -8,11 +8,6 @@ variable "hosted_zone" {
   type        = string
 }
 
-variable "availability_zones" {
-  description = "Instance Availability Zones of the host"
-  type        = list(string)
-}
-
 variable "vpc_tags" {
   description = "VPC tags to place host or ec2 instances into"
   type        = map(string)
@@ -91,7 +86,7 @@ variable "wordpress_efs_transition_to_ia" {
   type        = string
 }
 
-variable "wordpress_labels_random_values" {
+variable "wordpress_secret_keys" {
   description = "Labels for authentication unique keys and salts for wp-config.php"
   type        = list(string)
 }

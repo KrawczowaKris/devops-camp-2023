@@ -53,12 +53,12 @@ if ! [ -d /efs/wordpress ]; then
   cat << EOF > wp-config.php
 <?php
 
-define( 'DB_NAME', '${db_name}' );
-define( 'DB_USER', 'admin' );
-define( 'DB_PASSWORD', '${password_rds}' );
-define( 'DB_HOST', '${endpoint}' );
-define( 'DB_CHARSET', 'utf8' );
-define( 'DB_COLLATE', '' );
+define('DB_NAME',     '${db_name}' );
+define('DB_USER',     'admin' );
+define('DB_PASSWORD', '${password_rds}' );
+define('DB_HOST',     '${endpoint}' );
+define('DB_CHARSET',  'utf8' );
+define('DB_COLLATE',  '' );
 
 define('AUTH_KEY',         '${auth_key}');
 define('SECURE_AUTH_KEY',  '${secure_auth_key}');

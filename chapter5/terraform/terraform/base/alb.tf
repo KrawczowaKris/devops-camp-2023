@@ -14,9 +14,9 @@ resource "aws_lb_target_group" "wordpress_tg_type" {
 resource "aws_lb_target_group_attachment" "wordpress_tg" {
   count = var.wordpress_ec2_instances_count
 
-  target_group_arn = aws_lb_target_group.wordpress_tg_type.arn
-  target_id        = module.wordpress_ec2[count.index].id
   port             = 80
+  target_id        = module.wordpress_ec2[count.index].id
+  target_group_arn = aws_lb_target_group.wordpress_tg_type.arn
 }
 
 /*
@@ -36,9 +36,9 @@ module "wordpress_alb" {
 
   target_groups = [
     {
-      name             = local.labels.wordpress_tg
-      backend_protocol = "HTTP"
       backend_port     = 80
+      backend_protocol = "HTTP"
+      name             = local.labels.wordpress_tg
       targets          = aws_lb_target_group_attachment.wordpress_tg
     }
   ]

@@ -18,8 +18,7 @@ module "wordpress_ec2" {
     db_name      = var.wordpress_rds_name
     password_rds = random_password.rds_admin_password.result
     endpoint     = module.wordpress_rds.db_instance_endpoint
-    // authentication unique keys and salts for wp-config.php
-    auth_key         = random_string.random["auth_key"].result
+    auth_key         = random_string.random["auth_key"].result # authentication unique keys and salts for wp-config.php
     secure_auth_key  = random_string.random["secure_auth_key"].result
     logged_in_key    = random_string.random["logged_in_key"].result
     nonce_key        = random_string.random["nonce_key"].result

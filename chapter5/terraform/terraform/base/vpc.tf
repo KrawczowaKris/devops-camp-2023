@@ -9,12 +9,16 @@ data "aws_subnets" "wordpress" {
   }
 }
 
+data "aws_availability_zones" "availability_zones" {
+  all_availability_zones = true
+}
+
 data "aws_subnet" "subnet_az" {
   vpc_id = data.aws_vpc.target.id
 
   filter {
     name   = "availability-zone"
-    values = [var.availability_zones[0]]
+    values = [data.aws_availability_zones.availability_zones.names[0]]
   }
 }
 
@@ -23,7 +27,7 @@ data "aws_subnet" "subnet_bz" {
 
   filter {
     name   = "availability-zone"
-    values = [var.availability_zones[1]]
+    values = [data.aws_availability_zones.availability_zones.names[1]]
   }
 }
 
@@ -32,7 +36,7 @@ data "aws_subnet" "subnet_cz" {
 
   filter {
     name   = "availability-zone"
-    values = [var.availability_zones[2]]
+    values = [data.aws_availability_zones.availability_zones.names[2]]
   }
 }
 

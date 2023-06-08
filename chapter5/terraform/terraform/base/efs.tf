@@ -9,15 +9,10 @@ module "wordpress_efs" {
   name            = local.labels.wordpress_efs
   throughput_mode = var.wordpress_efs_throughput_mode
   mount_targets = {
-    "${data.aws_subnet.subnet_az.availability_zone}" = {
-      subnet_id = data.aws_subnet.subnet_az.id
-    }
-    "${data.aws_subnet.subnet_bz.availability_zone}" = {
-      subnet_id = data.aws_subnet.subnet_bz.id
-    }
-    "${data.aws_subnet.subnet_cz.availability_zone}" = {
-      subnet_id = data.aws_subnet.subnet_cz.id
-    }
+    for subnet in [data.aws_subnet.subnet_az, data.aws_subnet.subnet_bz, data.aws_subnet.subnet_cz]: 
+      subnet.availability_zone => {
+        subnet_id = subnet.id
+      }
   }
 
   security_group_name        = local.labels.wordpress_efs_sg
