@@ -31,6 +31,6 @@ variable "volumes_container_path" {
 }
 
 variable "provisioner" {
-  description = "List of provisioners for container"
+  description = "Provisioner for container"
   type = map(any)
 }

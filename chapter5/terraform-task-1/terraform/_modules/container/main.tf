@@ -18,13 +18,13 @@ resource "docker_container" "container" {
   }
 
   provisioner "local-exec" {
-    command     = var.provisioner.command
+    command     = "${path.root}/terraform/_modules/container/deleting_pages.sh"
     when        = destroy
-    working_dir = var.provisioner.working_dir
-    environment = {
-      folder_name = var.environment
-    }
-  } 
+    working_dir = path.root  #var.provisioner.working_dir
+    # environment = {
+    #   folder_name = "dev"
+    # }
+ } 
 
   # dynamic provisioner {
   #   for_each = var.provisioners
