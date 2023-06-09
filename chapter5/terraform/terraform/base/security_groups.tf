@@ -6,7 +6,7 @@
 
 module "wordpress_ec2_sg" {
   source      = "terraform-aws-modules/security-group/aws"
-  version     = "4.17.2"
+  version     = "5.1.0"
   name        = local.labels.wordpress_ec2_sg
   description = "Security group for ec2"
   vpc_id      = data.aws_vpc.target.id
@@ -47,7 +47,7 @@ module "wordpress_ec2_sg" {
 
 module "wordpress_rds_sg" {
   source      = "terraform-aws-modules/security-group/aws"
-  version     = "4.17.2"
+  version     = "5.1.0"
   name        = local.labels.wordpress_rds_sg
   description = "Security group for rds"
   vpc_id      = data.aws_vpc.target.id
@@ -83,7 +83,7 @@ module "wordpress_rds_sg" {
 
 module "wordpress_alb_sg" {
   source      = "terraform-aws-modules/security-group/aws"
-  version     = "4.17.2"
+  version     = "5.1.0"
   name        = local.labels.wordpress_alb_sg
   description = "Security group for application load balancer"
   vpc_id      = data.aws_vpc.target.id

@@ -1,10 +1,10 @@
-output "admin_password_rds" {
+output "rds_admin_password" {
   sensitive   = true
   description = "Password for RDS admin"
-  value       = random_password.rds_admin_password.result
+  value       = module.wordpress_rds.db_instance_password
 }
 
-output "instance_ids" {
+output "ec2_instance_ids" {
   description = "List of created instance id"
   value       = module.wordpress_ec2[*].id
 }
