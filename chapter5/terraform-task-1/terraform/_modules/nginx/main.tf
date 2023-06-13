@@ -8,15 +8,12 @@ locals {
 module "nginx" {
   source = "../container"
 
-  container_image = var.container_image
-  container_image_keep_locally = var.container_image_keep_locally
-  container_name = var.container_name
-  
-  container_ports = var.container_ports
+  image              = var.container_image
+  image_keep_locally = var.container_image_keep_locally
+  name               = var.container_name
+  ports              = var.container_ports
 
-  volumes_host_path = "${abspath(path.root)}/../../${var.environment}"
-  #volumes_host_path = var.nginx_volumes_host_path
-  volumes_container_path = var.nginx_volumes_container_path
+  volumes = var.volumes_nginx
 
   provisioner = {
     type        = "local-exec"

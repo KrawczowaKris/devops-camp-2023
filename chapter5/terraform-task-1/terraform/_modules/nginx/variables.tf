@@ -16,22 +16,24 @@ variable "container_name" {
 
 variable "container_ports" {
   description = "Value of the name for the Docker container"
-  type        = map(any)
+  type = object({
+    internal = number
+    external = number
+  })
   default = {
     internal = 80
     external = 8000
   }
 }
 
-variable "nginx_volumes_container_path" {
-  description = "Path to volume container for nginx"
-  type        = string
-}
+variable "volumes_nginx" {
+  description = "List fo volumes for docker container"
 
-# variable "nginx_volumes_host_path" {
-#   description = "Path to volume host for nginx"
-#   type        = string
-# }
+  type = list(object({
+    volumes_host_path      = string
+    volumes_container_path = string
+  }))
+}
 
 variable "client" {
   description = "Client username"

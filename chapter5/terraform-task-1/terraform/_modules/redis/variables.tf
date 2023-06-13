@@ -16,7 +16,10 @@ variable "container_name" {
 
 variable "container_ports" {
   description = "Value of the name for the Docker container"
-  type        = map(any)
+  type = object({
+    internal = number
+    external = number
+  })
   default = {
     internal = 6379
     external = 6379

@@ -10,5 +10,5 @@ output "container_id_short" {
 
 output "image_id" {
   description = "ID of the Docker image"
-  value = module.nginx.image_id
+  value       = module.nginx.image_id
 }

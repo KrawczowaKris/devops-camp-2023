@@ -2,25 +2,29 @@
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
   │ nginx configuration variables                                                                                    │
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
- */
+*/
+
+variable "use_nginx" {
+  description = "Do you need to speed up the perf using nginx?"
+  type        = bool
+  default     = true
+}
 
 variable "nginx" {
   type = object({
-    image           = string
-    container_name  = optional(string)
-    container_ports = optional(map(string))
-    keep_locally    = bool
+    image          = string
+    container_name = optional(string)
+    container_ports = optional(object({
+      internal = number
+      external = number
+    }))
+    keep_locally = bool
   })
   default = {
     image        = "nginx:latest"
     keep_locally = false
   }
 }
-
-# variable "nginx_volumes_host_path" {
-#   description = "Path to volume host for nginx"
-#   type        = string
-# }
 
 variable "nginx_volumes_container_path" {
   description = "Path to volume container for nginx"
@@ -33,7 +37,6 @@ variable "nginx_volumes_container_path" {
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
 
-
 variable "use_redis" {
   description = "Do you need to speed up the perf using redis?"
   type        = bool
@@ -42,10 +45,13 @@ variable "use_redis" {
 
 variable "redis" {
   type = object({
-    image           = string
-    container_name  = optional(string)
-    container_ports = optional(map(string))
-    keep_locally    = bool
+    image          = string
+    container_name = optional(string)
+    container_ports = optional(object({
+      internal = number
+      external = number
+    }))
+    keep_locally = bool
   })
   default = {
     image = "redis:latest"
@@ -61,7 +67,7 @@ variable "redis" {
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
   │ env=specific configuration variables                                                                             │
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
- */
+*/
 
 variable "client" {
   description = "Client username"

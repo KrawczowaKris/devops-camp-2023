@@ -1,10 +1,10 @@
 module "redis" {
   source = "../container"
-  
-  container_image = var.container_image
-  container_image_keep_locally = var.container_image_keep_locally
-  container_name = var.container_name
-  
-  container_ports = var.container_ports
-  provisioner    = {}
+
+  image              = var.container_image
+  image_keep_locally = var.container_image_keep_locally
+  name               = var.container_name
+  ports              = var.container_ports
+
+  provisioner = {}
 }
