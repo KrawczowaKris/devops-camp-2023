@@ -1,4 +1,4 @@
-variable "eks_office_public_ip_address" {
+variable "ekb_office_public_ip_address" {
   description = "Corporate IP address for ssh access to ec2 instances and rds"
   type        = string
 }
@@ -126,9 +126,4 @@ variable "environment" {
     condition     = contains(["dev", "staging", "prod"], var.environment)
     error_message = "Environment could be one of dev | staging | prod"
   }
-}
-
-variable "tags" {
-  description = "tags for the resource"
-  type        = map(any)
 }

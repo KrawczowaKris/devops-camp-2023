@@ -6,13 +6,14 @@
 
 module "wordpress_efs" {
   source          = "terraform-aws-modules/efs/aws"
+  version         = "~> 1.1.1"
   name            = local.labels.wordpress_efs
   throughput_mode = var.wordpress_efs_throughput_mode
   mount_targets = {
-    for subnet in [data.aws_subnet.subnet_az, data.aws_subnet.subnet_bz, data.aws_subnet.subnet_cz]: 
-      subnet.availability_zone => {
-        subnet_id = subnet.id
-      }
+    for subnet in [data.aws_subnet.subnet_az, data.aws_subnet.subnet_bz, data.aws_subnet.subnet_cz] :
+    subnet.availability_zone => {
+      subnet_id = subnet.id
+    }
   }
 
   security_group_name        = local.labels.wordpress_efs_sg
@@ -29,6 +30,4 @@ module "wordpress_efs" {
   }
 
   attach_policy = false
-
-  tags = var.tags
 }

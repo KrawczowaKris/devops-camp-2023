@@ -1,12 +1,23 @@
 /*
   ┌───────────────────────────────────────────────────────────────────────┐
+  │ generate password for rds                                             │
+  └───────────────────────────────────────────────────────────────────────┘
+*/
+
+resource "random_password" "rds_admin_password" {
+  length  = 16
+  special = false
+}
+
+/*
+  ┌───────────────────────────────────────────────────────────────────────┐
   │ create rds                                                            │
   └───────────────────────────────────────────────────────────────────────┘
 */
 
 module "wordpress_rds" {
   source                              = "terraform-aws-modules/rds/aws"
-  version                             = "5.9.0"
+  version                             = "~> 5.9.0"
   identifier                          = local.labels.wordpress_rds
   engine                              = var.wordpress_rds_engine
   instance_class                      = var.wordpress_rds_instance_type
@@ -25,5 +36,4 @@ module "wordpress_rds" {
   subnet_ids                          = data.aws_subnets.wordpress.ids
   create_random_password              = false
   password                            = random_password.rds_admin_password.result
-  tags                                = var.tags
 }

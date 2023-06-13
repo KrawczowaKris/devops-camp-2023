@@ -27,7 +27,7 @@ resource "aws_lb_target_group_attachment" "wordpress_tg" {
 
 module "wordpress_alb" {
   source             = "terraform-aws-modules/alb/aws"
-  version            = "8.6.0"
+  version            = "~> 8.6.0"
   name               = local.labels.wordpress_alb
   load_balancer_type = "application"
   vpc_id             = data.aws_vpc.target.id
@@ -65,6 +65,4 @@ module "wordpress_alb" {
   ]
 
   depends_on = [module.wordpress_ec2]
-
-  tags = var.tags
 }

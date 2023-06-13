@@ -39,8 +39,3 @@ data "aws_subnet" "subnet_cz" {
     values = [data.aws_availability_zones.availability_zones.names[2]]
   }
 }
-
-data "aws_route53_zone" "zone_record" {
-  name         = var.hosted_zone
-  private_zone = false
-}

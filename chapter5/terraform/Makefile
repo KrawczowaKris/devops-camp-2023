@@ -31,10 +31,10 @@ ifndef ALLOWED_IP
 	@echo "❗ List of approved IPs: ${ALLOWED_IPS}"
 	@exit 1
 endif
-# ifndef AWS_REGION
-# 	@echo "❗ You need to set AWS_DEFAULT_REGION var"
-# 	@exit 1
-# endif
+ifndef AWS_REGION
+	@echo "❗ You need to set AWS_DEFAULT_REGION var"
+	@exit 1
+endif
 	@if test "$(ENVIRONMENT)" = "" ; then \
 		echo "ENVIRONMENT var is not set"; \
 		exit 1; \
