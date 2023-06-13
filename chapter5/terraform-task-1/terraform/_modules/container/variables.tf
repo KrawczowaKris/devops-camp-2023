@@ -37,8 +37,3 @@ variable "volumes" {
     }
   ]
 }
-
-variable "provisioner" {
-  description = "Provisioner for container"
-  type        = map(any)
-}

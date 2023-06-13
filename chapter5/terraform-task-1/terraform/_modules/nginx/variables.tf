@@ -27,7 +27,7 @@ variable "container_ports" {
 }
 
 variable "volumes_nginx" {
-  description = "List fo volumes for docker container"
+  description = "List for volumes for docker container nginx"
 
   type = list(object({
     volumes_host_path      = string

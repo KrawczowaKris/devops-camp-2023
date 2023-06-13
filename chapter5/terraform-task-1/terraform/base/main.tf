@@ -1,6 +1,6 @@
 module "nginx" {
   source = "./modules/nginx"
- count  = var.use_nginx ? 1 : 0
+  count  = var.use_nginx ? 1 : 0
 
   container_image              = var.nginx.image
   container_name               = var.nginx.container_name != "" ? var.nginx.container_name : null
@@ -25,6 +25,7 @@ module "redis" {
   container_name               = var.use_redis ? var.redis.container_name : null
   container_ports              = var.use_redis ? var.redis.container_ports : null
   container_image_keep_locally = var.redis.keep_locally
+  volumes_redis                = []
   client                       = var.client
   project                      = var.project
   environment                  = var.environment
