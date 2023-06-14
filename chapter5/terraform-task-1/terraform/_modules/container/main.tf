@@ -7,9 +7,13 @@ resource "docker_container" "container" {
   image = docker_image.image.image_id
   name  = var.name
 
-  ports {
-    internal = var.ports.internal
-    external = var.ports.external
+  dynamic "ports" {
+    for_each = var.ports
+
+    content {
+      internal = ports.value.internal
+      external = ports.value.external
+    }
   }
 
   dynamic "volumes" {

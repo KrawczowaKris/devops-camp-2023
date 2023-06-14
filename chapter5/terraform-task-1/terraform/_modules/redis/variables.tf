@@ -1,5 +1,5 @@
 variable "container_image" {
-  description = "Value of the name for the docker container with redis"
+  description = "Value of the image for the docker container with redis"
   type        = string
 }
 
@@ -15,18 +15,20 @@ variable "container_name" {
 }
 
 variable "container_ports" {
-  description = "Value of the name for the Docker container"
-  type = object({
+  description = "Value of the ports for the Docker container"
+  type = list(object({
     internal = number
     external = number
-  })
-  default = {
-    internal = 6379
-    external = 6379
-  }
+  }))
+  default = [
+    {
+      internal = 6379
+      external = 6379
+    }
+  ]
 }
 
-variable "volumes_redis" {
+variable "container_volumes" {
   description = "List for volumes for docker container redis"
 
   type = list(object({

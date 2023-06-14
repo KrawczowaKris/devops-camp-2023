@@ -133,4 +133,3 @@ versions: _environment ## versions info (for github bug tickets) (use: make _sta
 
 tfcloud: _environment ## Open Terraform Cloud Workspace (use: make _staging tfcloud)
 	xdg-open https://app.terraform.io/app/${TF_ORG}/workspaces/aws-infra-${ENVIRONMENT} > /dev/null 2>&1
-	

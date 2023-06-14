@@ -5,7 +5,7 @@
 */
 
 variable "use_nginx" {
-  description = "Do you need to speed up the perf using nginx?"
+  description = "Do you need nginx?"
   type        = bool
   default     = true
 }
@@ -13,22 +13,22 @@ variable "use_nginx" {
 variable "nginx" {
   type = object({
     image          = string
-    container_name = optional(string)
-    container_ports = optional(object({
+    container_name = optional(string, null)
+    container_ports = optional(list(object({
       internal = number
       external = number
-    }))
+    })), null)
     keep_locally = bool
+    volumes = optional(list(object({
+      volumes_host_path      = string
+      volumes_container_path = string
+    })))
+    volumes_container_path = optional(string)
   })
   default = {
     image        = "nginx:latest"
     keep_locally = false
   }
-}
-
-variable "nginx_volumes_container_path" {
-  description = "Path to volume container for nginx"
-  type        = string
 }
 
 /* 
@@ -46,20 +46,30 @@ variable "use_redis" {
 variable "redis" {
   type = object({
     image          = string
-    container_name = optional(string)
-    container_ports = optional(object({
+    container_name = optional(string, null)
+    container_ports = optional(list(object({
       internal = number
       external = number
-    }))
+    })), null)
     keep_locally = bool
+    volumes = optional(list(object({
+      volumes_host_path      = string
+      volumes_container_path = string
+    })))
   })
   default = {
     image = "redis:latest"
-    container_ports = {
-      internal = 6379
-      external = 6379
-    }
+    container_ports = [
+      {
+        internal = 6379
+        external = 6379
+      }
+    ]
     keep_locally = false
+    volumes = [{
+      volumes_container_path = ""
+      volumes_host_path      = ""
+    }]
   }
 }
 

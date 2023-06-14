@@ -14,16 +14,16 @@ variable "name" {
 }
 
 variable "ports" {
-  description = "Value of the name for the Docker container"
+  description = "Value of the ports for the Docker container"
 
-  type = object({
+  type = list(object({
     internal = number
     external = number
-  })
+  }))
 }
 
 variable "volumes" {
-  description = "List fo volumes for docker container"
+  description = "List of volumes for docker container"
 
   type = list(object({
     volumes_host_path      = string
