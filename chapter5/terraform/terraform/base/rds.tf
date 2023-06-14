@@ -17,7 +17,7 @@ resource "random_password" "rds_admin_password" {
 
 module "wordpress_rds" {
   source                              = "terraform-aws-modules/rds/aws"
-  version                             = "~> 5.9.0"
+  version                             = "5.9.0"
   identifier                          = local.labels.wordpress_rds
   engine                              = var.wordpress_rds_engine
   instance_class                      = var.wordpress_rds_instance_type

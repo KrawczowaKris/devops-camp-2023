@@ -5,13 +5,6 @@ module "wordpress_label" {
   attributes  = [var.project]
 }
 
-module "wordpress_instance_labels" {
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=0.25.0"
-  for_each   = toset(data.aws_availability_zones.availability_zones.names)
-  context    = module.wordpress_label.context
-  attributes = [var.project, each.value]
-}
-
 locals {
   labels = {
     wordpress_sg     = join(module.wordpress_label.delimiter, [module.wordpress_label.id, "sg"])
