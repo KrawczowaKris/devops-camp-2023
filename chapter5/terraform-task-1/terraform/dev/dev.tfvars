@@ -23,8 +23,11 @@ nginx = {
       external = 8080
     }
   ]
-  keep_locally           = true
-  volumes_container_path = "/usr/share/nginx/html"
+  keep_locally = true
+  volumes = [{
+    volumes_host_path      = "value"
+    volumes_container_path = "/usr/share/nginx/html"
+  }]
 }
 
 /* 

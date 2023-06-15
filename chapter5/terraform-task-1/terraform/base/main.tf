@@ -9,7 +9,7 @@ module "nginx" {
   container_volumes = [
     {
       volumes_host_path      = "${abspath(path.root)}/../../${var.environment}"
-      volumes_container_path = var.nginx.volumes_container_path
+      volumes_container_path = var.nginx.volumes[0].volumes_container_path
     }
   ]
   client      = var.client

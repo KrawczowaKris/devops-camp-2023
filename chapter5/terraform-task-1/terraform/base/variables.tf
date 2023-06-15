@@ -23,7 +23,6 @@ variable "nginx" {
       volumes_host_path      = string
       volumes_container_path = string
     })))
-    volumes_container_path = optional(string)
   })
   default = {
     image        = "nginx:latest"
