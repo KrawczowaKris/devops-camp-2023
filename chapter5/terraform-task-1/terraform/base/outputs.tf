@@ -1,9 +1,9 @@
 output "nginx" {
   description = "Nginx configuration"
-  value       = var.use_nginx ? module.nginx[0].nginx : {}
+  value       = var.use_nginx ? module.nginx[*].nginx : []
 }
 
 output "redis" {
   description = "Redis configuration"
-  value       = var.use_redis ? module.redis[0].redis : {}
+  value       = var.use_redis ? module.redis[*].redis : []
 }

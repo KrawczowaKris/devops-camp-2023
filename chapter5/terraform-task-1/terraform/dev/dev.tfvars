@@ -16,6 +16,7 @@ use_nginx = true
 
 nginx = {
   image          = "nginx:latest"
+  keep_locally   = true
   container_name = "saritasa-devops-camps-2023-workspace-dev"
   container_ports = [
     {
@@ -23,7 +24,6 @@ nginx = {
       external = 8080
     }
   ]
-  keep_locally = true
   volumes = [{
     volumes_host_path      = "value"
     volumes_container_path = "/usr/share/nginx/html"

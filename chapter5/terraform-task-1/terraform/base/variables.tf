@@ -13,12 +13,12 @@ variable "use_nginx" {
 variable "nginx" {
   type = object({
     image          = string
+    keep_locally   = bool
     container_name = optional(string, null)
     container_ports = optional(list(object({
       internal = number
       external = number
     })), null)
-    keep_locally = bool
     volumes = optional(list(object({
       volumes_host_path      = string
       volumes_container_path = string
@@ -45,12 +45,12 @@ variable "use_redis" {
 variable "redis" {
   type = object({
     image          = string
+    keep_locally   = bool
     container_name = optional(string, null)
     container_ports = optional(list(object({
       internal = number
       external = number
     })), null)
-    keep_locally = bool
     volumes = optional(list(object({
       volumes_host_path      = string
       volumes_container_path = string
