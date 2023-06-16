@@ -33,13 +33,13 @@ module "wordpress_ec2" {
     rds_password     = module.wordpress_rds.db_instance_password
     rds_endpoint     = module.wordpress_rds.db_instance_endpoint
     auth_key         = random_string.wordpress_keys["auth_key"].result # authentication unique keys and salts for wp-config.php
-    secure_auth_key  = random_string.wordpress_keys["secure_auth_key"].result
-    logged_in_key    = random_string.wordpress_keys["logged_in_key"].result
-    nonce_key        = random_string.wordpress_keys["nonce_key"].result
     auth_salt        = random_string.wordpress_keys["auth_salt"].result
-    secure_auth_salt = random_string.wordpress_keys["secure_auth_salt"].result
+    logged_in_key    = random_string.wordpress_keys["logged_in_key"].result
     logged_in_salt   = random_string.wordpress_keys["logged_in_salt"].result
+    nonce_key        = random_string.wordpress_keys["nonce_key"].result
     nonce_salt       = random_string.wordpress_keys["nonce_salt"].result
+    secure_auth_key  = random_string.wordpress_keys["secure_auth_key"].result
+    secure_auth_salt = random_string.wordpress_keys["secure_auth_salt"].result
     efs_id           = module.wordpress_efs.id
     fqdn_record      = aws_acm_certificate.cert.domain_name
   })

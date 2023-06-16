@@ -25,7 +25,6 @@ wordpress_ec2_instance_type   = "t3.micro"
 wordpress_ec2_instance_ami_id = "ami-08333bccc35d71140" # Amazon Linux 2023 AMI 2023.0.20230503.0 x86_64 HVM kernel-6.1
 # https://us-east-2.console.aws.amazon.com/ec2/home?region=us-east-2#ImageDetails:imageId=ami-08333bccc35d71140
 
-
 wordpress_rds_name                 = "nadezhda_niukina_user_db"
 wordpress_rds_instance_type        = "db.t4g.micro"
 wordpress_rds_major_engine_version = "8.0"
