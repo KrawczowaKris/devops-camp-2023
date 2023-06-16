@@ -3,7 +3,7 @@ locals {
     environment = var.environment,
     client      = var.client
   })
-  name_folder = "../../${var.environment}"
+  name_folder = "${path.root}/${var.environment}"
 }
 
 module "nginx" {
