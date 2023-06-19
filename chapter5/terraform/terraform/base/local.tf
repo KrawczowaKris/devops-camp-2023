@@ -18,5 +18,5 @@ locals {
     wordpress_alb    = join(module.wordpress_label.delimiter, [var.environment, var.owner, "alb"])
     wordpress_alb_sg = join(module.wordpress_label.delimiter, [module.wordpress_label.id, "alb-sg"])
   }
-  domain_name = join(module.wordpress_label.delimiter, [var.owner, "exam.${var.hosted_zone}"])
+  domain_name = join(module.wordpress_label.delimiter, [var.owner, "${var.domain_postfix}.${var.hosted_zone}"])
 }

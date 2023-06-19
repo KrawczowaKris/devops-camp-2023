@@ -12,9 +12,12 @@ environment = "dev"
   └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 */
 
-ekb_office_public_ip_address = "195.201.120.196/32"
+allowed_ec2_ssh_ips = [
+  "195.201.120.196/32"
+]
 
-hosted_zone = "saritasa-camps.link"
+hosted_zone    = "saritasa-camps.link"
+domain_postfix = "exam"
 
 vpc_tags = {
   Name = "default"

@@ -1,10 +1,15 @@
-variable "ekb_office_public_ip_address" {
-  description = "Corporate IP address for ssh access to ec2 instances and rds"
-  type        = string
+variable "allowed_ec2_ssh_ips" {
+  description = "List of corporate IP addresses for ssh access to ec2 instances and rds"
+  type        = list(string)
 }
 
 variable "hosted_zone" {
   description = "Hosted zone for dns records for site"
+  type        = string
+}
+
+variable "domain_postfix" {
+  description = "Postfix for domain name for site"
   type        = string
 }
 

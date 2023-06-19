@@ -13,29 +13,8 @@ data "aws_availability_zones" "availability_zones" {
   all_availability_zones = true
 }
 
-data "aws_subnet" "subnet_az" {
-  vpc_id = data.aws_vpc.target.id
-
-  filter {
-    name   = "availability-zone"
-    values = [data.aws_availability_zones.availability_zones.names[0]]
-  }
-}
-
-data "aws_subnet" "subnet_bz" {
-  vpc_id = data.aws_vpc.target.id
-
-  filter {
-    name   = "availability-zone"
-    values = [data.aws_availability_zones.availability_zones.names[1]]
-  }
-}
-
-data "aws_subnet" "subnet_cz" {
-  vpc_id = data.aws_vpc.target.id
-
-  filter {
-    name   = "availability-zone"
-    values = [data.aws_availability_zones.availability_zones.names[2]]
-  }
+data "aws_subnet" "subnets" {
+  for_each          = toset(data.aws_availability_zones.availability_zones.names)
+  vpc_id            = data.aws_vpc.target.id
+  availability_zone = each.value
 }

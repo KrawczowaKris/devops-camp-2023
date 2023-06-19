@@ -26,7 +26,7 @@ module "wordpress_ec2" {
   instance_type          = var.wordpress_ec2_instance_type
   key_name               = module.ssh_key_pair.key_name
   vpc_security_group_ids = [module.wordpress_ec2_sg.security_group_id]
-  subnet_id              = data.aws_subnet.subnet_az.id
+  subnet_id              = data.aws_subnet.subnets[data.aws_availability_zones.availability_zones.names[0]].id
   user_data = templatefile("${path.cwd}/terraform/base/userdata.tpl", {
     rds_name         = module.wordpress_rds.db_instance_name
     rds_user         = module.wordpress_rds.db_instance_username
