@@ -14,19 +14,20 @@ variable "nginx" {
   type = object({
     image          = string
     keep_locally   = bool
-    container_name = optional(string, null)
+    container_name = string
     container_ports = optional(list(object({
       internal = number
       external = number
-    })), null)
+    })), [])
     volumes = optional(list(object({
       volumes_host_path      = string
       volumes_container_path = string
     })))
   })
   default = {
-    image        = "nginx:latest"
-    keep_locally = false
+    image          = "nginx:latest"
+    keep_locally   = false
+    container_name = "nginx"
   }
 }
 
@@ -46,18 +47,20 @@ variable "redis" {
   type = object({
     image          = string
     keep_locally   = bool
-    container_name = optional(string, null)
+    container_name = string
     container_ports = optional(list(object({
       internal = number
       external = number
-    })), null)
+    })), [])
     volumes = optional(list(object({
       volumes_host_path      = string
       volumes_container_path = string
     })))
   })
   default = {
-    image = "redis:latest"
+    image          = "redis:latest"
+    keep_locally   = true
+    container_name = "redis"
     container_ports = [
       {
         internal = 6379
