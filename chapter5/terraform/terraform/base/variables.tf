@@ -11,6 +11,7 @@ variable "hosted_zone" {
 variable "domain_postfix" {
   description = "Postfix for domain name for site"
   type        = string
+  default     = ""
 }
 
 variable "vpc_tags" {
