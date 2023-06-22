@@ -8,18 +8,14 @@ variable "hosted_zone" {
   type        = string
 }
 
-variable "domain_postfix" {
-  description = "Postfix for domain name for site"
+variable "wordpress_subdomain_prefix" {
+  description = "Prefix for subdomain name for site"
   type        = string
-  default     = ""
 }
 
-variable "vpc_tags" {
+variable "vpc_tags_filter" {
   description = "VPC tags to place host or ec2 instances into"
   type        = map(string)
-  default = {
-    Name = "default"
-  }
 }
 
 /* 
@@ -97,13 +93,11 @@ variable "wordpress_rds_family" {
 variable "wordpress_rds_username" {
   description = "Username of RDS user"
   type        = string
-  default     = "admin"
 }
 
 variable "wordpress_rds_port" {
   description = "Port for RDS"
   type        = number
-  default     = 3306
 }
 
 /* 

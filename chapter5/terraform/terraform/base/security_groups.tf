@@ -5,16 +5,16 @@
 */
 
 module "wordpress_ec2_sg" {
-  source              = "terraform-aws-modules/security-group/aws"
-  version             = "5.1.0"
-  name                = local.labels.wordpress_ec2_sg
-  description         = "Security group for ec2"
-  vpc_id              = data.aws_vpc.target.id
-  ingress_cidr_blocks = var.allowed_ec2_ssh_ips
+  source      = "terraform-aws-modules/security-group/aws"
+  version     = "5.1.0"
+  name        = local.labels.wordpress_ec2_sg
+  description = "Security group for ec2"
+  vpc_id      = data.aws_vpc.target.id
   ingress_with_cidr_blocks = [
     {
       rule        = "ssh-tcp"
       description = "Open ssh connection"
+      cidr_blocks = join(",", var.allowed_ec2_ssh_ips)
     }
   ]
   ingress_with_source_security_group_id = [
@@ -79,11 +79,6 @@ module "wordpress_alb_sg" {
       cidr_blocks = "0.0.0.0/0"
       description = "Open https connection"
     },
-    {
-      rule        = "http-80-tcp"
-      cidr_blocks = "0.0.0.0/0"
-      description = "Open http connection"
-    }
   ]
   egress_with_cidr_blocks = [
     {

@@ -16,10 +16,10 @@ allowed_ec2_ssh_ips = [
   "195.201.120.196/32"
 ]
 
-hosted_zone    = "saritasa-camps.link"
-domain_postfix = "exam"
+hosted_zone                = "saritasa-camps.link"
+wordpress_subdomain_prefix = "exam"
 
-vpc_tags = {
+vpc_tags_filter = {
   Name = "default"
 }
 
@@ -42,11 +42,10 @@ wordpress_efs_throughput_mode  = "elastic"
 wordpress_efs_transition_to_ia = "AFTER_30_DAYS"
 
 wordpress_secret_keys = [
-  "auth_key",       # for making changes to the site
-  "auth_salt",      # for encrypting user passwords when they authenticate on the site
-  "logged_in_key",  # for creating a cookie for a logged in user
-  "logged_in_salt", # for creating secure cookies that are used to authenticate users 
-  # who are already logged into the site
+  "auth_key",        # for making changes to the site
+  "auth_salt",       # for encrypting user passwords when they authenticate on the site
+  "logged_in_key",   # for creating a cookie for a logged in user
+  "logged_in_salt",  # for creating secure cookies that are used to authenticate users who are already logged into the site
   "nonce_key",       # for signing the nonce key
   "nonce_salt",      # for to generating nonce security tokens
   "secure_auth_key", # for signing the authorization cookie for the SSL administrator

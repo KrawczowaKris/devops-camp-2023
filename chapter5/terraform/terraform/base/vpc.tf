@@ -1,5 +1,5 @@
 data "aws_vpc" "target" {
-  tags = var.vpc_tags
+  tags = var.vpc_tags_filter
 }
 
 data "aws_subnets" "wordpress" {
